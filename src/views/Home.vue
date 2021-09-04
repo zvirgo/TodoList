@@ -8,7 +8,7 @@
           color="orange"
           full-width
           :landscape="$vuetify.breakpoint.smAndUp"
-          no-title="true"
+          no-title
           class="mt-3"
         ></v-date-picker>
       </v-col>
