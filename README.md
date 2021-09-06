@@ -1,4 +1,5 @@
-# todo
+# todoList
+Create Todo List app with Vue.js & Vuex & Vuetify & Routing & Firebase
 
 ## Project setup
 ```
