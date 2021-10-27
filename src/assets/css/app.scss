@@ -1,0 +1,18 @@
+.v-btn {
+  letter-spacing: normal;
+  text-transform: capitalize;
+}
+.byField {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+
+  .fieldTitle {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  .fieldContent {
+    padding: 1rem 1rem;
+  }
+}

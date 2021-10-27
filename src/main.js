@@ -5,6 +5,8 @@ import router from './router'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import VueApexCharts from 'vue-apexcharts'
+import '../src/assets/css/app.scss';
+
 Vue.use(VueApexCharts)
 
 Vue.component('apexchart', VueApexCharts)

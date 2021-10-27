@@ -32,6 +32,14 @@
               <v-list-item-title>Todo List</v-list-item-title>
             </router-link>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-post-outline </v-icon>
+            </v-list-item-icon>
+            <router-link to="/blogs">
+              <v-list-item-title>Blogs</v-list-item-title>
+            </router-link>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
