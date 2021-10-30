@@ -9,9 +9,11 @@
     },
     "dependencies": {
         "apexcharts": "^3.27.3",
+        "axios": "^0.24.0",
         "chart.js": "^3.5.0",
         "core-js": "^3.6.5",
         "firebase": "^8.9.0",
+        "underscore": "^1.13.1",
         "vue": "^2.6.11",
         "vue-apexcharts": "^1.6.2",
         "vue-chartkick": "^1.1.0",

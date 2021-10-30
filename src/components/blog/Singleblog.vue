@@ -11,12 +11,11 @@
 
     <v-card-text class="text--primary">
       <div>
-        <p class="text-h4 text--primary">Post Title</p>
+        <p class="text-h5 text--primary">{{post.title}}</p>
       </div>
 
       <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-        aliquid atque, nulla.
+       {{post.body}}
       </div>
     </v-card-text>
 
@@ -32,6 +31,7 @@
 <script>
 export default {
   name: "single-blog",
+  props: ["post"],
 };
 </script>
 
