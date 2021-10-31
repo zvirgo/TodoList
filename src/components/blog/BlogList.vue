@@ -13,7 +13,7 @@
         <singleblog
           class="mb-5"
           v-for="post in postGroup"
-          :key="post.id"
+          :key="post.source.id"
           :post="post"
         />
       </v-col>
@@ -48,11 +48,12 @@ export default {
       this.loading = true;
       axios
         .get(
-          `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=9`
+          `https://newsapi.org/v2/everything?q=Apple&from=2021-10-30&page=${page}&pageSize=9&sortBy=popularity&apiKey=22da5d0f616f41bc99cbae18aabb5c0d`
         )
         .then((response) => {
           this.loading = false;
-          this.posts = response.data;
+          // console.log(response.data.articles);
+          this.posts = response.data.articles;
           let mainPost = this.posts.shift();
           this.posts = [mainPost, ..._.chunk(this.posts, 2)];
         })

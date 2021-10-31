@@ -1,26 +1,26 @@
 <template>
   <v-card class="mx-auto">
     <v-img
-      class="white--text align-end"
+      class="white--text align-end img-responsive"
       height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="post.urlToImage"
     >
     </v-img>
 
-    <v-card-subtitle class="pb-0"> January 1, 2021 </v-card-subtitle>
+    <v-card-subtitle class="pb-0"> {{ this.date }} </v-card-subtitle>
 
     <v-card-text class="text--primary">
       <div>
-        <p class="text-h5 text--primary">{{post.title}}</p>
+        <p class="text-h5 text--primary">{{ post.title }}</p>
       </div>
 
       <div>
-       {{post.body}}
+        <p class="">{{ post.description }}</p>
       </div>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn color="primary" text>
+      <v-btn color="primary" text :href="post.url">
         Read more
         <v-icon right dark>mdi-arrow-right </v-icon>
       </v-btn>
@@ -31,7 +31,15 @@
 <script>
 export default {
   name: "single-blog",
+  data() {
+    return {
+      date: "",
+    };
+  },
   props: ["post"],
+  created() {
+    this.date = this.post.publishedAt.substring(0, 10);
+  },
 };
 </script>
 
