@@ -11,11 +11,11 @@
 
     <v-card-text class="text--primary">
       <div>
-        <p class="text-h5 text--primary">{{ post.title }}</p>
+        <p class="text-h5 text--primary news-title">{{ this.title }}</p>
       </div>
 
       <div>
-        <p class="">{{ post.description }}</p>
+        <p class="news-description">{{ post.description }}</p>
       </div>
     </v-card-text>
 
@@ -34,14 +34,24 @@ export default {
   data() {
     return {
       date: "",
+      title: "",
     };
   },
   props: ["post"],
   created() {
     this.date = this.post.publishedAt.substring(0, 10);
+    this.title = this.post.title.substring(0, 50);
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.news-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.news-description {
+  max-height: 100px;
+}
 </style>

@@ -9,6 +9,24 @@
           <v-card-text>
             <v-form ref="form">
               <v-text-field
+                prepend-icon="mdi-account"
+                v-model="userName"
+                label="User Name"
+                required
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-account"
+                v-model="firstName"
+                label="First Name"
+                required
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-account"
+                v-model="lastName"
+                label="Last Name"
+                required
+              ></v-text-field>
+              <v-text-field
                 prepend-icon="mdi-email"
                 v-model="email"
                 label="E-mail"
@@ -47,7 +65,12 @@
                 Sign up
               </v-btn>
               <v-btn v-if="waitRequest" class="mr-4" @click="signup">
-                <v-progress-circular  :width="3" :size="25" indeterminate color="green">
+                <v-progress-circular
+                  :width="3"
+                  :size="25"
+                  indeterminate
+                  color="green"
+                >
                 </v-progress-circular>
                 Waiting...
               </v-btn>
@@ -67,14 +90,17 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
+import { db } from "../main";
 export default {
   name: "Signup",
   data() {
     return {
+      userName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
-
       showPassword: false,
       rules: {
         required: (value) => !!value || "Required.",
@@ -87,12 +113,19 @@ export default {
     async signup() {
       try {
         this.waitRequest = true;
-        await firebase
+        const result = await firebase
           .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            this.$router.replace({ name: "todoList" });
-          });
+          .createUserWithEmailAndPassword(this.email, this.password);
+        db.collection("users").doc(result.user.uid).set({
+          userName: this.userName,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          
+        });
+       
+        this.$router.replace({ name: "Home" });
       } catch (err) {
         this.waitRequest = false;
         alert("Error-${err.message}");
@@ -101,6 +134,7 @@ export default {
     valid() {
       return this.password === this.confirmPassword;
     },
+    
   },
 };
 </script>

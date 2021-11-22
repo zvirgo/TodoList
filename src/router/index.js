@@ -7,6 +7,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import Signup from '../components/Signup.vue'
 import Blogs from '../components/blog/Blogs.vue'
+import Profile from '../components/Profile.vue'
+import CreatePost from '../views/CreatePost.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,16 @@ const routes = [{
         path: '/blogs',
         name: 'blogs',
         component: Blogs
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: Profile
+    },
+    {
+        path: '/createPost',
+        name: 'createPost',
+        component: CreatePost
     },
 
 ]
