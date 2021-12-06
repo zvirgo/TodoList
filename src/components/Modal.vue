@@ -22,9 +22,7 @@
 export default {
   name: "Modal",
   data() {
-    return {
-      dialog: false,
-    };
+    return {};
   },
   props: {
     title: {

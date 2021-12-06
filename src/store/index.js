@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    //Profile
     user: null,
     profileFirstName: null,
     profileLastName: null,
@@ -15,16 +16,17 @@ export default new Vuex.Store({
     profileUserName: null,
     profileId: null,
     profileInitials: null,
-    
+
+    //Post
     blogHTML: "Write your blog title here...",
     blogTitle: "",
     blogPhotoName: "",
     blogPhotoFileURL: null,
     blogPhotoPreview: null,
     editPost: null,
-
   },
   mutations: {
+    //Profile
     setProfileInfo(state, value) {
       state.profileId = value.id;
       state.profileEmail = value.data().email;
@@ -50,8 +52,22 @@ export default new Vuex.Store({
       state.profileUserName = payload;
     },
 
+    //Post
+    newBlogPost(state, payload) {
+      state.blogHTML = payload;
+    },
+    updateBlogTitle(state, payload) {
+      state.blogTitle = payload;
+    },
+    fileNameChange(state, payload) {
+      state.blogPhotoName = payload;
+    },
+    createFileURL(state, payload) {
+      state.blogPhotoFileURL = payload;
+    },
   },
   actions: {
+    //Profile
     async getCurrentUser({ commit }) {
       const dbResults = await db
         .collection("users")
@@ -69,6 +85,7 @@ export default new Vuex.Store({
       });
       commit("setProfileInitials");
     },
+    //Post
   },
   modules: {},
 });
