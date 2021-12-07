@@ -28,7 +28,11 @@
       </v-col>
       <v-col cols="12">
         <div class="editor">
-          <vue-editor v-model="postHTML" @imageAdded="imageHandler" />
+          <vue-editor
+            v-model="postHTML"
+            @imageAdded="imageHandler"
+            :editorOptions="editorSettings"
+          />
         </div>
       </v-col>
       <v-col cols="12" class="mt-5">
@@ -52,6 +56,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/storage";
+import { VueEditor } from "vue2-editor";
 import { mapState } from "vuex";
 import BlogCoverPreview from "../components/BlogCoverPreview.vue";
 import Quill from "quill";
@@ -60,18 +65,18 @@ const ImageResize = require("quill-image-resize-module").default;
 Quill.register("modules/imageResize", ImageResize);
 export default {
   name: "CreatePost",
-  components: { BlogCoverPreview },
+  components: { BlogCoverPreview, VueEditor },
   data() {
     return {
       file: null,
       error: null,
       errorMsg: null,
       showPreview: false,
-      // editorSettings: {
-      //   modules: {
-      //     imageResize: {},
-      //   },
-      // },
+      editorSettings: {
+        modules: {
+          imageResize: {},
+        },
+      },
     };
   },
   computed: {
@@ -116,7 +121,6 @@ export default {
       this.showPreview = true;
     },
     imageHandler(file, Editor, cursorLocation, resetUploader) {
-      // eslint-disable-next-line no-debugger
       debugger;
       const docRef = firebase
         .storage()

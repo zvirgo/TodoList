@@ -7,10 +7,10 @@ import "firebase/firestore";
 import VueApexCharts from "vue-apexcharts";
 import "../src/assets/css/app.scss";
 import store from "./store";
-import  Vue2Editor  from "vue2-editor";
+import { VueEditor } from "vue2-editor";
 
 Vue.use(VueApexCharts);
-Vue.use(Vue2Editor);
+Vue.use(VueEditor);
 
 Vue.component("apexchart", VueApexCharts);
 
