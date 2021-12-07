@@ -4,10 +4,10 @@
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title>ِDashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <router-link to="/signup">
-        <v-btn icon> <v-icon> mdi-account-plus </v-icon></v-btn>
-        </router-link>
-      <v-btn @click="signOut" icon> <v-icon> mdi-logout </v-icon> </v-btn>
+      <Avatar v-if="user"/>
+      <router-link v-else to="/login">
+        <v-btn icon > <v-icon> mdi-account-plus </v-icon></v-btn>
+      </router-link>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
@@ -34,10 +34,18 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-post-outline </v-icon>
+              <v-icon>mdi-newspaper-variant-multiple </v-icon>
             </v-list-item-icon>
             <router-link to="/blogs">
-              <v-list-item-title>Blogs</v-list-item-title>
+              <v-list-item-title>News</v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-post-outline </v-icon>
+            </v-list-item-icon>
+            <router-link to="/createPost">
+              <v-list-item-title>Create Post</v-list-item-title>
             </router-link>
           </v-list-item>
         </v-list-item-group>
@@ -50,10 +58,13 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/auth";
+import { mapState } from "vuex";
+import Avatar from "./Avatar.vue";
 export default {
   name: "TopHeader",
+  components: {
+    Avatar,
+  },
   data() {
     return {
       email: "",
@@ -63,19 +74,9 @@ export default {
       group: null,
     };
   },
-  methods: {
-    signOut() {
-      try {
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            this.$router.replace({ name: "login" });
-          });
-      } catch (err) {
-        console.log("error");
-      }
-    },
+  methods: {},
+  computed: {
+    ...mapState(["user"]),
   },
 };
 </script>

@@ -7,19 +7,19 @@
       <v-col
         class="flex"
         cols="6"
-        v-for="(postGroup, index) in posts.slice(1)"
-        :key="index"
+        v-for="postGroup in posts.slice(1)"
+        :key="postGroup.id"
       >
         <singleblog
           class="mb-5"
           v-for="post in postGroup"
-          :key="post.source.id"
+          :key="post.title"
           :post="post"
         />
       </v-col>
     </v-row>
     <v-row v-else> Loading... </v-row>
-    <pagination :length="6" @changePage="changePage($event)" />
+    <pagination v-if="!loading" :length="6" @changePage="changePage($event)" />
   </v-container>
 </template>
 
@@ -48,7 +48,7 @@ export default {
       this.loading = true;
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=Apple&from=2021-10-30&page=${page}&pageSize=9&sortBy=popularity&apiKey=22da5d0f616f41bc99cbae18aabb5c0d`
+          `https://newsapi.org/v2/everything?q=tesla&from=2021-10-30&page=${page}&pageSize=9&sortBy=popularity&apiKey=22da5d0f616f41bc99cbae18aabb5c0d`
         )
         .then((response) => {
           this.loading = false;
