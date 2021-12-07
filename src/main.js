@@ -8,9 +8,15 @@ import VueApexCharts from "vue-apexcharts";
 import "../src/assets/css/app.scss";
 import store from "./store";
 import { VueEditor } from "vue2-editor";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 Vue.use(VueApexCharts);
 Vue.use(VueEditor);
+Vue.use(Toast, options);
+const options = {
+  // You can set your default options here
+};
 
 Vue.component("apexchart", VueApexCharts);
 

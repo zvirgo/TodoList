@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="d-flex align-center">
-      <h2>{{ this.blogTitle }}</h2>
+      <p>{{ this.blogTitle }}</p>
       <v-img :src="blogPhotoFileURL" contain></v-img>
       <div v-html="blogHTML"></div>
     </v-row>
@@ -12,7 +12,7 @@
 import { mapState } from "vuex";
 export default {
   name: "post-preview",
-  computed: { ...mapState(["blogTitle", "blogHTML","blogPhotoFileURL"]) },
+  computed: { ...mapState(["blogTitle", "blogHTML", "blogPhotoFileURL"]) },
 };
 </script>
 

@@ -4,7 +4,7 @@
       <v-col cols="4">
         <v-text-field
           label="Enter Blog Title"
-          :v-model="postTitle"
+          v-model="blogTitle"
         ></v-text-field>
       </v-col>
       <v-col cols="4">
@@ -30,7 +30,7 @@
         <div class="editor">
           <vue-editor
             v-model="postHTML"
-            @imageAdded="imageHandler"
+            @imageAdded="handleImageAdded"
             :editorOptions="editorSettings"
           />
         </div>
@@ -42,7 +42,9 @@
               Post Preview
             </v-btn>
           </router-link>
-          <v-btn color="success" class="mr-4 mt-4"> Publish Blog </v-btn>
+          <v-btn color="success" @click="uploadBlog" class="mr-4 mt-4">
+            Publish Blog
+          </v-btn>
         </div>
       </v-col>
     </v-row>
@@ -56,6 +58,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/storage";
+// import { db } from "../main";
 import { VueEditor } from "vue2-editor";
 import { mapState } from "vuex";
 import BlogCoverPreview from "../components/BlogCoverPreview.vue";
@@ -77,6 +80,7 @@ export default {
           imageResize: {},
         },
       },
+      useCustomImageHandler: true,
     };
   },
   computed: {
@@ -93,9 +97,9 @@ export default {
     blogCoverPhotoName() {
       return this.blogPhotoName;
     },
-    postTitle: {
+    blogTitle: {
       get() {
-        return this.blogTitle;
+        return this.$store.state.blogTitle;
       },
       set(payload) {
         this.$store.commit("updateBlogTitle", payload);
@@ -120,12 +124,13 @@ export default {
     blogPhotoPreview() {
       this.showPreview = true;
     },
-    imageHandler(file, Editor, cursorLocation, resetUploader) {
+    handleImageAdded(file, Editor, cursorLocation, resetUploader) {
       debugger;
       const docRef = firebase
         .storage()
         .ref()
         .child(`documents/blogPostPhotos/${this.file.name}`);
+      debugger;
       docRef.put(file).on(
         "state_changed",
         (snapshot) => {
@@ -140,6 +145,26 @@ export default {
           resetUploader();
         }
       );
+    },
+    uploadBlog() {
+      if (this.blogTitle.length !== 0 && this.blogHTML) {
+        if (this.file) {
+          return;
+        }
+        this.$toast.error("Please ensure you uploaded a cover photo!", {
+          timeout: 2000,
+          position: "bottom-right",
+        });
+        return;
+      }
+      this.$toast.error(
+        "Please ensure Blog Title & Blog Post has been filled!",
+        {
+          timeout: 2000,
+          position: "bottom-right",
+        }
+      );
+      return;
     },
   },
 };
